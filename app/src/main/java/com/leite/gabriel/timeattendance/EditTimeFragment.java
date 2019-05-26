@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.text.style.TtsSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,7 @@ public class EditTimeFragment extends Fragment {
     private Button btnDelete;
     private Button btnSave;
 
-    private final TimeCheck timeCheck = new TimeCheck();
+    private TimeCheck timeCheck;
 
     public static EditTimeFragment newInstance(TimeCheck timeCheck) {
 
@@ -41,7 +42,7 @@ public class EditTimeFragment extends Fragment {
 
         if (getArguments() != null) {
             long id = getArguments().getLong(ARG_TIME_CHECK_ID);
-            timeCheck.Load(getActivity(), id);
+            timeCheck = Database.TimeCheck().load(id);
         }
     }
 
@@ -80,13 +81,13 @@ public class EditTimeFragment extends Fragment {
     }
 
     private void DeleteTimeCheck() {
-        timeCheck.Delete(getActivity());
+        Database.TimeCheck().delete(timeCheck);
         getFragmentManager().popBackStack();
     }
 
     private void SaveChanges(int hour, int minute) {
         timeCheck.setTime(String.format("%02d:%02d", hour, minute));
-        timeCheck.Save(getActivity());
+        Database.TimeCheck().update(timeCheck);
         getFragmentManager().popBackStack();
     }
 

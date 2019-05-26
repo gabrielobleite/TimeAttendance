@@ -2,6 +2,7 @@ package com.leite.gabriel.timeattendance;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -61,7 +62,7 @@ public class ReportFragment extends Fragment {
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
 
-        List lst = new TimeCheck().RecoverTimeCheck(getActivity(), sDate);
+        List lst = Database.TimeCheck().loadByDate(sDate);
 
         recyclerView.setAdapter(new ReportRecyclerViewAdapter(lst, mListener));
 
@@ -74,15 +75,12 @@ public class ReportFragment extends Fragment {
         if(lst.size()%2==1)
             footer += "\nThe day have a pending time, without a closure";
         txtFooter.setText(footer);
-
         return view;
     }
 
     private int getTimeSpent(List<TimeCheck> lst) {
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-
         int timeSpent = 0;
-
         for (int i = 0; i < lst.size() - 1; i = i + 2) {
             try {
                 Date startDate = timeFormat.parse(lst.get(i).getTime());
@@ -92,9 +90,6 @@ public class ReportFragment extends Fragment {
             } catch (ParseException e) {
             }
         }
-
-
-
         return timeSpent / 1000 / 60;
     }
 

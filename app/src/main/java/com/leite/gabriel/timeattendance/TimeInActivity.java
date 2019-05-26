@@ -2,6 +2,7 @@ package com.leite.gabriel.timeattendance;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,9 @@ public class TimeInActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Database.InstantiateDatabase(this);
+
         setContentView(R.layout.activity_time_in);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -95,7 +99,7 @@ public class TimeInActivity extends AppCompatActivity {
         TimeCheck timeCheck = new TimeCheck();
         timeCheck.setDate(sDate);
         timeCheck.setTime(sTime);
-        long l = timeCheck.Save(this);
+        Database.TimeCheck().insertAll(timeCheck);
         Toast.makeText(this, "New appointment was made to " + sDate + " at " + sTime, Toast.LENGTH_LONG).show();
     }
 }
