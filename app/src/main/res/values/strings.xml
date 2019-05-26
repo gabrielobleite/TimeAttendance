@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Time Attendance</string>
+    <string name="title_activity_time_in">Time Check</string>
+    <string name="timein_timetext">Current Time</string>
+    <string name="timein_datetext">Current Date</string>
+    <string name="timein_submit">Make Appointment</string>
+    <string name="timein_dateFormat">dd/MM/yyyy</string>
+    <string name="timein_timeFormat">HH:mm</string>
+    <string name="title_activity_report">Manage Time Checks</string>
+    <string name="report_filter">View Marks</string>
+    <string name="report_header">List of marks to day:</string>
+    <string name="btnSave">Save</string>
+    <string name="btnDelete">Delete</string>
+    <string name="pick_a_date">Choose a Date</string>
+    <string name="menu_time_in_activity">Appointments</string>
+    <string name="menu_report_activity">Manage Times</string>
+</resources>
