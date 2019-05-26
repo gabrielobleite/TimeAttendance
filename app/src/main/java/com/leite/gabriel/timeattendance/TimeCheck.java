@@ -15,13 +15,13 @@ public class TimeCheck implements BaseColumns {
     private static final String COLUMN_NAME_DATE = "date_check";
     private static final String COLUMN_NAME_TIME = "time_check";
     private static final String SQL_CREATE_TIME =
-            "CREATE TABLE " + Repository.TimeCheck.TABLE_NAME + " (" +
-                    Repository.TimeCheck._ID + " INTEGER PRIMARY KEY," +
-                    Repository.TimeCheck.COLUMN_NAME_DATE + " TEXT," +
-                    Repository.TimeCheck.COLUMN_NAME_TIME + " TEXT)";
+            "CREATE TABLE " + TimeCheck.TABLE_NAME + " (" +
+                    TimeCheck._ID + " INTEGER PRIMARY KEY," +
+                    TimeCheck.COLUMN_NAME_DATE + " TEXT," +
+                    TimeCheck.COLUMN_NAME_TIME + " TEXT)";
 
     private static final String SQL_DELETE_TIME =
-            "DROP TABLE IF EXISTS " + Repository.TimeCheck.TABLE_NAME;
+            "DROP TABLE IF EXISTS " + TimeCheck.TABLE_NAME;
 
     private long id;
     private String date;
@@ -88,7 +88,7 @@ public class TimeCheck implements BaseColumns {
         values.put(TimeCheck.COLUMN_NAME_TIME, getTime());
 
         // Insert the new row, returning the primary key value of the new row
-        id = db.insert(Repository.TimeCheck.TABLE_NAME, null, values);
+        id = db.insert(TimeCheck.TABLE_NAME, null, values);
         return id;
     }
 
@@ -123,19 +123,19 @@ public class TimeCheck implements BaseColumns {
         // you will actually use after this query.
         String[] projection = {
                 BaseColumns._ID,
-                Repository.TimeCheck.COLUMN_NAME_DATE,
-                Repository.TimeCheck.COLUMN_NAME_TIME
+                TimeCheck.COLUMN_NAME_DATE,
+                TimeCheck.COLUMN_NAME_TIME
         };
 
         // Filter results WHERE "title" = 'My Title'
-        String selection = Repository.TimeCheck.COLUMN_NAME_DATE + " = ?";
+        String selection = TimeCheck.COLUMN_NAME_DATE + " = ?";
         String[] selectionArgs = { sDate };
 
         // How you want the results sorted in the resulting Cursor
-        String sortOrder = Repository.TimeCheck.COLUMN_NAME_TIME + " ASC";
+        String sortOrder = TimeCheck.COLUMN_NAME_TIME + " ASC";
 
         Cursor cursor = db.query(
-                Repository.TimeCheck.TABLE_NAME,   // The table to query
+                TimeCheck.TABLE_NAME,   // The table to query
                 projection,             // The array of columns to return (pass null to get all)
                 selection,              // The columns for the WHERE clause
                 selectionArgs,          // The values for the WHERE clause
@@ -147,9 +147,9 @@ public class TimeCheck implements BaseColumns {
         List itemIds = new ArrayList();
         while(cursor.moveToNext()) {
             TimeCheck item = new TimeCheck();
-            item.id = cursor.getLong(cursor.getColumnIndexOrThrow(Repository.TimeCheck._ID));
-            item.date = cursor.getString(cursor.getColumnIndexOrThrow(Repository.TimeCheck.COLUMN_NAME_DATE));
-            item.time = cursor.getString(cursor.getColumnIndexOrThrow(Repository.TimeCheck.COLUMN_NAME_TIME));
+            item.id = cursor.getLong(cursor.getColumnIndexOrThrow(TimeCheck._ID));
+            item.date = cursor.getString(cursor.getColumnIndexOrThrow(TimeCheck.COLUMN_NAME_DATE));
+            item.time = cursor.getString(cursor.getColumnIndexOrThrow(TimeCheck.COLUMN_NAME_TIME));
             itemIds.add(item);
         }
         cursor.close();
@@ -167,19 +167,19 @@ public class TimeCheck implements BaseColumns {
         // you will actually use after this query.
         String[] projection = {
                 BaseColumns._ID,
-                Repository.TimeCheck.COLUMN_NAME_DATE,
-                Repository.TimeCheck.COLUMN_NAME_TIME
+                TimeCheck.COLUMN_NAME_DATE,
+                TimeCheck.COLUMN_NAME_TIME
         };
 
         // Filter results WHERE "title" = 'My Title'
-        String selection = Repository.TimeCheck._ID + " = ?";
+        String selection = TimeCheck._ID + " = ?";
         String[] selectionArgs = { Long.toString(lId) };
 
         // How you want the results sorted in the resulting Cursor
-        String sortOrder = Repository.TimeCheck._ID + " ASC";
+        String sortOrder = TimeCheck._ID + " ASC";
 
         Cursor cursor = db.query(
-                Repository.TimeCheck.TABLE_NAME,   // The table to query
+                TimeCheck.TABLE_NAME,   // The table to query
                 projection,             // The array of columns to return (pass null to get all)
                 selection,              // The columns for the WHERE clause
                 selectionArgs,          // The values for the WHERE clause
@@ -190,9 +190,9 @@ public class TimeCheck implements BaseColumns {
 
         TimeCheck item;
         while(cursor.moveToNext()) {
-            this.id = cursor.getLong(cursor.getColumnIndexOrThrow(Repository.TimeCheck._ID));
-            this.date = cursor.getString(cursor.getColumnIndexOrThrow(Repository.TimeCheck.COLUMN_NAME_DATE));
-            this.time = cursor.getString(cursor.getColumnIndexOrThrow(Repository.TimeCheck.COLUMN_NAME_TIME));
+            this.id = cursor.getLong(cursor.getColumnIndexOrThrow(TimeCheck._ID));
+            this.date = cursor.getString(cursor.getColumnIndexOrThrow(TimeCheck.COLUMN_NAME_DATE));
+            this.time = cursor.getString(cursor.getColumnIndexOrThrow(TimeCheck.COLUMN_NAME_TIME));
         }
         cursor.close();
     }

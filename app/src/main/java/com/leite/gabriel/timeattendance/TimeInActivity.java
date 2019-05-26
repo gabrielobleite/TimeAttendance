@@ -92,7 +92,10 @@ public class TimeInActivity extends AppCompatActivity {
     }
 
     void SubmitTime(String sDate, String sTime){
-        long l = Repository.getInstance().CreateTimeCheck(this, sDate, sTime);
+        TimeCheck timeCheck = new TimeCheck();
+        timeCheck.setDate(sDate);
+        timeCheck.setTime(sTime);
+        long l = timeCheck.Save(this);
         Toast.makeText(this, "New appointment was made to " + sDate + " at " + sTime, Toast.LENGTH_LONG).show();
     }
 }
